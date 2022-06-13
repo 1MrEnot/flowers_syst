@@ -1,73 +1,41 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Flowers Syst</title>
-        <link rel="stylesheet" type="text/css" href="style.css">
-        <link rel="stylesheet" type="text/css" href="style_profile.css">
-    </head>
+{% extends "base.html" %}
 
-    <body>
-        <header>
-            <div class="head">
-                <div class="logo">
-                    <img src="logo.png" height="50">
-                    <label>Flowers Syst</label>
-                </div>
-                <div class="menu">
-                    <a href="plant.html">Растения</a>
-                    <a href="schedule.html">Графики</a>
-                    <a href="profile.html" class="act">Профиль</a>
-                </div>
-            </div>
-            <div class="line"></div>
-        </header>
+{% block title %}
+    Профиль
+{% endblock %}
 
-        <main>
-            <div class="card">
-                <div class="people_card">
-                    <div>
-                        <img src="logo.png" height="160">
-                    </div>
-                    <div>
-                        <p>Владелец:</p>
-                        <p>Кэтти</p>
-                        <p>kydryavceva.ket@gmail.com</p>
-                    </div>
-                </div>
-                <div class="about_plants">
-                    <div class="text">
-                        <p>Количество растений:</p>
-                        <p>3</p>
-                        <p>Система автополива:</p>
-                        <p>не подключена</p>
-                        <p>Зимний режим:</p>
-                        <label class="switch">
-                            <input type="checkbox">
-                            <span class="slider round"></span>
-                        </label>
-                    </div>
-                </div>
-                <input class="sensor" type="button" value="Подключить датчик">
-                <input class="automatic_watering" type="button" value="Подключить систему автополива">
-            </div>
-        </main>
-    </body>
+{% set active = 'profile' %}
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style_profile.css') }}">
+{% endblock %}
 
-    <footer>
-        <div class="inf">
+{% block main %}
+    <div class="card">
+        <div class="people_card">
             <div>
-                <p>Контактная информация:</p>
-                <p>flowers.syst@gmail.com</p>
+                <img src="{{ url_for('static', filename='logo.png') }}" height="160" alt="Фото аккаунта">
             </div>
             <div>
-                <p><a href="plant.html">Растения</a></p>
-                <p><a href="schedule.html">Графики</a></p>
-                <p><a href="profile.html">Профиль</a></p>
-            </div>            
+                <p>Владелец:</p>
+                <p>{{ name }}</p>
+                <p>{{ email }}</p>
+            </div>
         </div>
-    </footer>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="ticketBooking.js"></script>
-
-</html>
+        <div class="about_plants">
+            <div class="text">
+                <p>Количество растений:</p>
+                <p>{{ plant_count }}</p>
+                <p>Система автополива:</p>
+                <p>не подключена</p>
+                <p>Зимний режим:</p>
+                <label class="switch">
+                    <input type="checkbox" {{ 'checked' if winter_mode }}>
+                    <span class="slider round"></span>
+                </label>
+            </div>
+        </div>
+        <input class="sensor" type="button" value="Подключить датчик">
+        <input class="automatic_watering" type="button" value="Подключить систему автополива">
+    </div>
+{% endblock %}

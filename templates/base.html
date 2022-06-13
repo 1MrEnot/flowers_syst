@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    {% block head %}
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename='jquery-3.6.0.min.js') }}"></script>
+    <title>{% block title %}{% endblock %}</title>
+    {% endblock %}
+</head>
+<body>
+    <header>
+        <div class="head">
+            <div class="logo">
+                <img src="{{ url_for('static', filename='logo.png') }}" height="50" alt="Логотип сервиса">
+                <label>Flowers Syst</label>
+            </div>
+            <div class="menu">
+                <a href="/plants" class="{{ 'act' if active == 'plants' }}">Растения</a>
+                <a href="/plots" class="{{ 'act' if active == 'plots' }}">Графики</a>
+                <a href="/profile" class="{{ 'act' if active == 'profile' }}">Профиль</a>
+            </div>
+        </div>
+        <div class="line"></div>
+    </header>
+
+    <main>
+        {% block main %}
+        {% endblock %}
+    </main>
+
+</body>
+<footer>
+    <div class="inf">
+        <div>
+            <p>Контактная информация:</p>
+            <p>flowers.syst@gmail.com</p>
+        </div>
+        <div>
+            <p><a href="/plants">Растения</a></p>
+            <p><a href="/plots">Графики</a></p>
+            <p><a href="/profile">Профиль</a></p>
+        </div>
+    </div>
+</footer>
+
+
+</html>

@@ -1,102 +1,70 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Flowers Syst</title>
-        <link rel="stylesheet" type="text/css" href="style.css">
-        <link rel="stylesheet" type="text/css" href="style_schedule.css">
-    </head>
+{% extends "base.html" %}
 
-    <body>
-        <header>
-            <div class="head">
-                <div class="logo">
-                    <img src="logo.png" height="50">
-                    <label>Flowers Syst</label>
-                </div>
-                <div class="menu">
-                    <a href="plant.html">Растения</a>
-                    <a href="schedule.html" class="act">Графики</a>
-                    <a href="profile.html">Профиль</a>
-                </div>
-            </div>
-            <div class="line"></div>
-        </header>
+{% block title %}
+    Графики
+{% endblock %}
 
-        <main>
-            <div class="card">
-                <div class="one_card">
-                    <div>
-                        <img src="logo.png" height="160">
-                    </div>
-                    <div class="text">
-                        <p class="text_1">Эхеверия</p>
-                        <p>До полива:</p>
-                        <p>5 дней</p>
-                        <p>Средний цикл:</p>
-                        <p>13 дней</p>
-                        <p>Зимний режим:</p>
-                        <label class="switch">
-                            <input type="checkbox">
-                            <span class="slider round"></span>
-                        </label>
-                    </div>
-                    <div class="graf"> График </div>
-                </div>
-                <div class="one_card">
-                    <div>
-                        <img src="logo.png" height="160">
-                    </div>
-                    <div class="text">
-                        <p class="text_1">Эхеверия</p>
-                        <p>До полива:</p>
-                        <p>5 дней</p>
-                        <p>Средний цикл:</p>
-                        <p>13 дней</p>
-                        <p>Зимний режим:</p>
-                        <label class="switch">
-                            <input type="checkbox">
-                            <span class="slider round"></span>
-                        </label>
-                    </div>
-                    <div class="graf"> График </div>
-                </div>
-                <div class="one_card">
-                    <div>
-                        <img src="logo.png" height="160">
-                    </div>
-                    <div class="text">
-                        <p class="text_1">Эхеверия</p>
-                        <p>До полива:</p>
-                        <p>5 дней</p>
-                        <p>Средний цикл:</p>
-                        <p>13 дней</p>
-                        <p>Зимний режим:</p>
-                        <label class="switch">
-                            <input type="checkbox">
-                            <span class="slider round"></span>
-                        </label>
-                    </div>
-                    <div class="graf"> График </div>
-                </div>
-            </div>
-        </main>
-    </body>
+{% set active = 'plots' %}
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style_schedule.css') }}">
+{% endblock %}
 
-    <footer>
-        <div class="inf">
+{% block main %}
+    <div class="card">
+        <div class="one_card">
             <div>
-                <p>Контактная информация:</p>
-                <p>flowers.syst@gmail.com</p>
+                <img src="{{ url_for('static', filename='logo.png') }}" height="160">
             </div>
-            <div>
-                <p><a href="plant.html">Растения</a></p>
-                <p><a href="schedule.html">Графики</a></p>
-                <p><a href="profile.html">Профиль</a></p>
-            </div>            
+            <div class="text">
+                <p class="text_1">Эхеверия</p>
+                <p>До полива:</p>
+                <p>5 дней</p>
+                <p>Средний цикл:</p>
+                <p>13 дней</p>
+                <p>Зимний режим:</p>
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+            <div class="graf"> График </div>
         </div>
-    </footer>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="ticketBooking.js"></script>
-
-</html>
+        <div class="one_card">
+            <div>
+                <img src="logo.png" height="160">
+            </div>
+            <div class="text">
+                <p class="text_1">Эхеверия</p>
+                <p>До полива:</p>
+                <p>5 дней</p>
+                <p>Средний цикл:</p>
+                <p>13 дней</p>
+                <p>Зимний режим:</p>
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+            <div class="graf"> График </div>
+        </div>
+        <div class="one_card">
+            <div>
+                <img src="logo.png" height="160">
+            </div>
+            <div class="text">
+                <p class="text_1">Эхеверия</p>
+                <p>До полива:</p>
+                <p>5 дней</p>
+                <p>Средний цикл:</p>
+                <p>13 дней</p>
+                <p>Зимний режим:</p>
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+            <div class="graf"> График </div>
+        </div>
+    </div>
+{% endblock %}

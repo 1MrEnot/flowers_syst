@@ -1,8 +1,8 @@
 from dependency_injector import containers, providers
-from services.UserService import UserService
 from sqlalchemy.engine import create_engine
 from sqlalchemy.orm import Session
 
+from services.UserService import UserService
 
 URL = "sqlite:///C:/Users/Max/Projects/flowers_syst_flask/test.db?check_same_thread=False"
 

@@ -1,39 +1,35 @@
-import dataclasses
+from typing import Optional
+
+from sqlalchemy.orm import Session
 
 from entities import User
-
-from sqlalchemy import create_engine
-from sqlalchemy.orm import Session
+from models.UserInfo import *
 
 
 class UserService:
     def __init__(self, session: Session):
         self._session = session
 
-    def get_user(self, user_id: int):
-        return self._session.query(User).get(user_id)
+    def create_user(self, user: UserCreateRequest):
+        existing_user = self._session.query(User).where(User.email == user.email)
+        if existing_user:
+            raise Exception("User already exists")
 
-    def create_user(self, user: User):
-        self._session.add(user)
+        adding_user = User(email=user.email, name=user.name, password=user.password)
+        self._session.add(adding_user)
         self._session.commit()
 
-    def get_user_info(self, user_id):
-        user = self._session.query(User).get(user_id)
-        return UserInfo(None, None, None, None)
-        # return UserInfo("<USERNAME>", user.email, user.winter_mode, len(user.plants))
+    def get_user_info(self, user_id: int) -> Optional[UserInfo]:
+        user: User = self._session.query(User).get(user_id)
+        if user is None:
+            return None
 
+        return UserInfo(user.id, user.name, user.email, user.winter_mode, len(user.plants))
 
-@dataclasses.dataclass
-class UserInfo:
-    name: str
-    email: str
-    is_winter_mode: bool
-    plant_count: int
+    def authenticate(self, login: str, password: str) -> Optional[UserInfo]:
+        user = self._session.query(User).where((User.email == login) & (User.password == password)).scalar()
+        if not user:
+            return None
 
+        return UserInfo(user.id, user.name, user.email, user.winter_mode, len(user.plants))
 
-if __name__ == '__main__':
-    eng = create_engine("sqlite:///../test.db", echo=True, future=True)
-    with Session(eng) as session:
-        serv = UserService(session)
-        user = User(email="new_user@foo.com", password="pass", winter_mode=True)
-        serv.create_user(user)

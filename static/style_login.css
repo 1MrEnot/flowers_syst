@@ -1,0 +1,58 @@
+main p {
+    margin-bottom: 20pt;
+}
+
+.data_user {
+    margin-bottom: 0pt;
+}
+
+.hi_text p {
+    margin-bottom: 25pt;
+}
+
+.login_field {
+    padding-left: 20pt;
+}
+
+input {
+    border-radius: 30pt;
+    height: 20pt;
+    width: 300pt;
+    margin-top: 5pt;
+    margin-bottom: 15pt;
+    border: 1px solid #DFDFDF;
+    padding-left: 15pt;
+    padding-right: 15pt;
+}
+
+.reg, .log {
+    text-decoration: underline;
+}
+
+.reg {
+    color: #A8BFAA;
+    font-size: 10pt;
+    margin-bottom: 0pt;
+}
+
+/* для кнопок */
+.log_but {
+    border-radius: 30pt;
+    margin-left: 150pt;
+    height: 30pt;
+    width: 180pt;
+    margin-bottom: 0pt;
+}
+
+.log_but:hover {
+    background-color: #F2F2F2;
+}
+
+.log_but {
+    background-color: #A8BFAA;
+    border: 2px solid #A8BFAA;
+}
+
+.log_but:hover {
+    border: 2px solid #A8BFAA;
+}
