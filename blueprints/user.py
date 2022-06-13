@@ -14,7 +14,7 @@ api_bp = Blueprint('user_api', __name__, url_prefix='/api/user', template_folder
 def user_page(user_id: int,
               user_service: UserService = Provide[Container.user_service]):
     user = user_service.get_user_info(user_id)
-    return render_template('user.html', name=user.email, plant_count=user.plant_count, winter_mode=user.is_winter_mode)
+    return render_template('login.html', name=user.email, plant_count=user.plant_count, winter_mode=user.is_winter_mode)
 
 
 @api_bp.post('/')

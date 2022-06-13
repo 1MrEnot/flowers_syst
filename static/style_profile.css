@@ -1,0 +1,56 @@
+.people_card, .about_plants {
+    margin: 0;
+    padding: 0;
+    display: grid;
+    align-items: center;
+}
+
+.people_card {
+    grid-template-columns: 1fr 2fr;
+}
+
+.about_plants {
+    grid-template-columns: 1fr;
+}
+
+.text {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+}
+
+.card p {
+    margin-top: 10pt;
+}
+
+/* для кнопок */
+input {
+    border-radius: 30pt;
+    margin-left: 20pt;
+    margin-right: 20pt;
+    height: 30pt;
+    margin-top: 10pt;
+    margin-bottom: 20pt;
+}
+
+input:hover {
+    background-color: #F2F2F2;
+}
+
+.sensor {
+    background-color: #A8BFAA;
+    border: 2px solid #A8BFAA;
+}
+
+.sensor:hover {
+    border: 2px solid #A8BFAA;
+}
+
+.automatic_watering {
+    background-color: #DFDFDF;
+    border: 2px solid #DFDFDF;
+}
+
+.automatic_watering:hover {
+    border: 2px solid #DFDFDF;
+}

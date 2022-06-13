@@ -19,7 +19,8 @@ class UserService:
 
     def get_user_info(self, user_id):
         user = self._session.query(User).get(user_id)
-        return UserInfo("<USERNAME>", user.email, user.winter_mode, len(user.plants))
+        return UserInfo(None, None, None, None)
+        # return UserInfo("<USERNAME>", user.email, user.winter_mode, len(user.plants))
 
 
 @dataclasses.dataclass
