@@ -3,7 +3,7 @@ from typing import Optional
 from sqlalchemy.orm import Session
 
 from entities import User
-from models.UserInfo import *
+from models import *
 
 
 class UserService:
@@ -24,12 +24,13 @@ class UserService:
         if user is None:
             return None
 
-        return UserInfo(user.id, user.name, user.email, user.winter_mode, len(user.plants))
+        plants = [PlantModel(p.id, p.name, p.average_cycle, p.next_watering) for p in user.plants]
+        return UserInfo(user.id, user.name, user.email, user.winter_mode, plants)
 
     def authenticate(self, login: str, password: str) -> Optional[UserInfo]:
         user = self._session.query(User).where((User.email == login) & (User.password == password)).scalar()
         if not user:
             return None
 
-        return UserInfo(user.id, user.name, user.email, user.winter_mode, len(user.plants))
-
+        plants = [PlantModel(p.id, p.name, p.average_cycle, p.next_watering) for p in user.plants]
+        return UserInfo(user.id, user.name, user.email, user.winter_mode, plants)

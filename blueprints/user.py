@@ -1,11 +1,11 @@
 from dependency_injector.wiring import Provide, inject
 from flask import Blueprint, request, render_template, jsonify, make_response, url_for, redirect
 
+import util
 from container import Container
-from models.UserInfo import UserCreateRequest
+from models import *
 from services.UserService import UserService
 
-USER_ID_COOKIE = "user_id"
 
 view_bp = Blueprint('user_view', __name__, url_prefix='/user', template_folder="blueprints/")
 api_bp = Blueprint('user_api', __name__, url_prefix='/api/user', template_folder="blueprints/")
@@ -15,7 +15,7 @@ bp = Blueprint('api', __name__, template_folder="blueprints/")
 @bp.route('/')
 @inject
 def index():
-    user_id = request.cookies.get(USER_ID_COOKIE)
+    user_id = request.cookies.get(util.USER_ID_COOKIE)
     if user_id is None:
         return render_template('login.html')
 
@@ -26,13 +26,13 @@ def index():
 @inject
 def user_page(user_service: UserService = Provide[Container.user_service]):
     try:
-        user_id = request.cookies.get(USER_ID_COOKIE)
+        user_id = request.cookies.get(util.USER_ID_COOKIE)
         user = user_service.get_user_info(int(user_id))
         return render_template(
             'profile.html',
             name=user.name,
             email=user.email,
-            plant_count=user.plant_count,
+            plant_count=len(user.plants),
             winter_mode=user.is_winter_mode
         )
     except:
@@ -69,5 +69,5 @@ def login(user_service: UserService = Provide[Container.user_service]):
         return {'error': 'Нет такого пользователя'}, 401
 
     response = make_response(jsonify({'redirect': '/user'}))
-    response.set_cookie('user_id', str(user.u_id))
+    response.set_cookie(util.USER_ID_COOKIE, str(user.u_id))
     return response

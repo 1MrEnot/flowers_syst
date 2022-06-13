@@ -1,4 +1,13 @@
+from typing import Optional
 import dataclasses
+
+
+@dataclasses.dataclass
+class PlantModel:
+    p_id: int
+    name: str
+    average_cycle: Optional[float]
+    next_watering: Optional[float]
 
 
 @dataclasses.dataclass
@@ -7,7 +16,7 @@ class UserInfo:
     name: str
     email: str
     is_winter_mode: bool
-    plant_count: int
+    plants: list[PlantModel]
 
 
 @dataclasses.dataclass
