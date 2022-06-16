@@ -118,8 +118,6 @@ mapMeasurement = (m) => {
     };
 }
 
-
 fetch(`/api/user/${userId}`)
     .then(resp => resp.json())
     .then(drawAllPlots);
-
