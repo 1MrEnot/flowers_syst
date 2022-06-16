@@ -8,63 +8,33 @@
 {% block head %}
     {{ super() }}
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style_schedule.css') }}">
+    <script src="{{ url_for('static', filename='chart.js') }}"></script>
+    <script src="{{ url_for('static', filename='schedule.js') }}" defer></script>
 {% endblock %}
 
 {% block main %}
     <div class="card">
-        <div class="one_card">
-            <div>
-                <img src="{{ url_for('static', filename='logo.png') }}" height="160">
+        {% for plant in plants %}
+            <div class="one_card" id="p_{{ plant.p_id }}">
+                <div>
+                    <img src="{{ url_for('static', filename='logo.png') }}" height="160">
+                </div>
+                <div class="text">
+                    <p class="text_1">{{ plant.name }}</p>
+                    <p>До полива:</p>
+                    <p>{{ plant.next_watering if plant.next_watering is not none else '?' }} дней</p>
+                    <p>Средний цикл:</p>
+                    <p>{{ plant.average_cycle if plant.average_cycle is not none else '?' }} дней</p>
+                    <p>Зимний режим:</p>
+                    <label class="switch">
+                    <input type="checkbox" {{ 'checked' if plant.winter_mode }}>
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div>
+                    <canvas id="g_{{ plant.p_id }}" width="130" height="45"></canvas>
+                </div>
             </div>
-            <div class="text">
-                <p class="text_1">Эхеверия</p>
-                <p>До полива:</p>
-                <p>5 дней</p>
-                <p>Средний цикл:</p>
-                <p>13 дней</p>
-                <p>Зимний режим:</p>
-                <label class="switch">
-                    <input type="checkbox">
-                    <span class="slider round"></span>
-                </label>
-            </div>
-            <div class="graf"> График </div>
-        </div>
-        <div class="one_card">
-            <div>
-                <img src="logo.png" height="160">
-            </div>
-            <div class="text">
-                <p class="text_1">Эхеверия</p>
-                <p>До полива:</p>
-                <p>5 дней</p>
-                <p>Средний цикл:</p>
-                <p>13 дней</p>
-                <p>Зимний режим:</p>
-                <label class="switch">
-                    <input type="checkbox">
-                    <span class="slider round"></span>
-                </label>
-            </div>
-            <div class="graf"> График </div>
-        </div>
-        <div class="one_card">
-            <div>
-                <img src="logo.png" height="160">
-            </div>
-            <div class="text">
-                <p class="text_1">Эхеверия</p>
-                <p>До полива:</p>
-                <p>5 дней</p>
-                <p>Средний цикл:</p>
-                <p>13 дней</p>
-                <p>Зимний режим:</p>
-                <label class="switch">
-                    <input type="checkbox">
-                    <span class="slider round"></span>
-                </label>
-            </div>
-            <div class="graf"> График </div>
-        </div>
+        {% endfor %}
     </div>
 {% endblock %}

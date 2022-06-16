@@ -2,9 +2,9 @@ from dependency_injector import containers, providers
 from sqlalchemy.engine import create_engine
 from sqlalchemy.orm import Session
 
-from services.UserService import UserService
+from services.Repository import Repository
 
-URL = "sqlite:///C:/Users/Max/Projects/flowers_syst_flask/test.db?check_same_thread=False"
+URL = "sqlite:///./test.db?check_same_thread=False"
 
 
 class Container(containers.DeclarativeContainer):
@@ -12,4 +12,4 @@ class Container(containers.DeclarativeContainer):
 
     engine = providers.Callable(create_engine, url=URL, echo=True, future=True)
     session = providers.Resource(Session, bind=engine)
-    user_service = providers.Factory(UserService, session=session)
+    repository = providers.Factory(Repository, session=session)
