@@ -57,6 +57,15 @@ def create_user(repository: Repository = Provide[Container.repository]):
         return {'error': str(e)}, 419
 
 
+@api_bp.get('/<user_id>')
+@inject
+def get_user(user_id: int, repository: Repository = Provide[Container.repository]):
+    user = repository.get_user_info(user_id)
+    as_dict = dataclasses.asdict(user, dict_factory=util.dataclass_dict_factory)
+    res = jsonify(as_dict)
+    return res
+
+
 @bp.post('/login')
 @inject
 def login(repository: Repository = Provide[Container.repository]):

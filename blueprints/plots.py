@@ -27,7 +27,7 @@ def plot_page(repository: Repository = Provide[Container.repository]):
 def plot_page(plant_id: int, repository: Repository = Provide[Container.repository]):
     plant_info = repository.get_plant_info(plant_id)
     plant_info.forecast = _get_fake_forecast(plant_info)
-    as_dict = dataclasses.asdict(plant_info, dict_factory=_dataclass_dict_factory)
+    as_dict = dataclasses.asdict(plant_info, dict_factory=util.dataclass_dict_factory)
     return jsonify(as_dict)
 
 
@@ -39,5 +39,4 @@ def _get_fake_forecast(plant_info, step=-0.05):
     return res
 
 
-def _dataclass_dict_factory(data):
-    return dict(x for x in data if x[1] is not None)
+

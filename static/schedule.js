@@ -4,6 +4,29 @@ const minColor = 'rgba(253,54,99, 0.5)';
 const tension = 0.3;
 
 const charts = {};
+const userId = getCookie('user_id');
+
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2)
+        return parts.pop().split(';').shift();
+}
+
+function drawAllPlots(userInfo){
+    userInfo.plants.map(p => p.p_id).forEach(drawPlotById);
+}
+
+function drawPlotById(plot_id){
+    fetch(`/api/plots/${plot_id}`)
+        .then(resp => resp.json())
+        .then(res => {
+            const id = `g_${res.p_id}`;
+            const measurements = res.measurements.map(mapMeasurement);
+            const forecast = res.forecast.map(mapMeasurement);
+            createChart(id, measurements, forecast, res.min_moisture);
+        });
+}
 
 const horizontalLinePlugin = {
     id: 'horizontalLine',
@@ -95,11 +118,8 @@ mapMeasurement = (m) => {
     };
 }
 
-fetch("/api/plots/1")
+
+fetch(`/api/user/${userId}`)
     .then(resp => resp.json())
-    .then(res => {
-        const id = `g_${res.p_id}`;
-        const measurements = res.measurements.map(mapMeasurement);
-        const forecast = res.forecast.map(mapMeasurement);
-        createChart(id, measurements, forecast, res.min_moisture);
-    });
+    .then(drawAllPlots);
+
