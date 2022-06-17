@@ -44,8 +44,8 @@ def create_user(repository: Repository = Provide[Container.repository]):
     try:
         data: dict = request.get_json()
         username = data.get('name', None)
-        password = data.get('password', None)
         email = data.get('email', None)
+        password = data.get('password', None)
 
         if not (username and email and password):
             return {'error': "Укажите имя, email и пароль"}, 422
@@ -54,7 +54,7 @@ def create_user(repository: Repository = Provide[Container.repository]):
         return 'OK', 200
 
     except Exception as e:
-        return {'error': str(e)}, 419
+        return {'message': str(e)}, 419
 
 
 @api_bp.get('/<user_id>')

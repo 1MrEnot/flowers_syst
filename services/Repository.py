@@ -11,7 +11,7 @@ class Repository:
         self._session = session
 
     def create_user(self, user: UserCreateRequest):
-        existing_user = self._session.query(User).where(User.email == user.email)
+        existing_user = self._session.query(User).where(User.email == user.email).scalar()
         if existing_user:
             raise Exception("User already exists")
 

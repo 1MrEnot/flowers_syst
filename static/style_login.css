@@ -25,11 +25,11 @@ input {
     padding-right: 15pt;
 }
 
-.reg, .log {
+.reg, .log, .log_r {
     text-decoration: underline;
 }
 
-.reg {
+.reg, .log_r {
     color: #A8BFAA;
     font-size: 10pt;
     margin-bottom: 0pt;
