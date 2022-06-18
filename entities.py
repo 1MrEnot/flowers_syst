@@ -35,6 +35,7 @@ class Measurement(Base):
     plant_id = Column(Integer, ForeignKey("plants.id"), nullable=False)
     timestamp = Column(DateTime, nullable=False)
     value = Column(Float(), nullable=False)
+    winter_mode = Column(Boolean(), nullable=False, default=False)
 
 
 class Watering(Base):
